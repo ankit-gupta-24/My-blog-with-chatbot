@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block title %}Experience{% endblock %}
+{% block content %}
+<div id='main' style="width: 80%; margin:auto;">
+    <h1 class='fadein mb-5 mt-5'>My Experience</h1>
+
+    <!-- current position -->
+
+
+    {% for e in exp %}
+    <div class="container mb-5 shadow p-3 mb-5 bg-white rounded">
+        <h2 style='color:goldenrod'>{{e.job_title}}</h2>
+        <p><i>{{e.company}}</i></p>
+        <p class='text-justify'><b>Roles and Responsibilities: </b> {{e.description}}</p>
+        <p><b>Skills Learned: </b>{{e.skills_learned}}</p>
+        <p><b>Tenure: </b><i>{{e.start_date}} - {{e.end_date}}</i></p>
+        <p><b>Duration: </b><i>{{ e.start_date|timesince:e.end_date}}</i></p>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

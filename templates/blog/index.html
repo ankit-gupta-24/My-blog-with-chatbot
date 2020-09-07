@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+{% block title %} Blog {% endblock %}
+{% block content %}
+<div id='main' style="width: 80%; margin:auto;">
+    <h1 class='fadein mb-5 mt-5'>My Blog/Articles</h1>
+    
+    {% if btn_display %}
+    <div class="row">
+        <div class="col col-lg-3 col-md-4 col-sm-3">
+        <a href="{% url 'bloghome' cmd='prev' fa=first_article la=last_article %}" class="btn btn-outline-secondary" >&larr; Prev</a>
+        </div>
+        <!-- search form -->
+        <div class="col col-lg-6 col-md-4 col-sm-6">
+        <form class="form-inline w-50 m-auto" method="POST" action="{%url 'bloghome' %}">
+            {% csrf_token %}
+            <input class="form-control border-0" type="text" name="searchblog" placeholder="Search Blog"/>
+            <button class="form-control border-0 ml-1" type='submit' value="Search" ><i class="fa fa-search"></i></button>
+        </form>
+        </div>
+
+        <div class="col col-lg-3 col-md-4 col-sm-3">
+        <a href="{% url 'bloghome' cmd='next' fa=first_article la=last_article %}" class="btn btn-outline-secondary float-right">Next &rarr;</a>
+        </div>
+
+    </div>
+    <hr>
+    {% endif%}
+
+
+    {% for article in articles %}
+    <div class="container mt-5 shadow-sm p-3 mb-5 bg-white rounded">
+        <h2><a href="{% url 'article' pk=article.id %}" id='art_title'>{{article.title}}</a></h2>
+        <p><i>{{article.pub_date}}</i></p>
+        <p>{{article.short_desc}}<a href="{% url 'article' pk=article.id %}">Read Full Article</a></p>
+        <p>Tags: <i>{{article.tags}}</i></p>
+    </div>
+    <!-- <hr> -->
+    {% endfor %}
+    {% if btn_display %}
+    <div>
+        <a href="{% url 'bloghome' cmd='prev' fa=first_article la=last_article %}" class="btn btn-outline-secondary" >&larr; Prev</a>
+        <a href="{% url 'bloghome' cmd='next' fa=first_article la=last_article %}" class="btn btn-outline-secondary float-right">Next &rarr;</a>
+
+    </div>
+    <hr>
+    {% endif %}
+
+</div>
+{% endblock %}

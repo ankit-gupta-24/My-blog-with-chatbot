@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> {% block title %} {% endblock%}  </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="" > -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel='stylesheet' href="{% static 'css/nav_style.css' %}">
+        <link rel='stylesheet' href="{% static 'css/index_style.css' %}">
+    </head>
+
+    <body>
+        {% include 'blog/nav.html' %}
+
+        {% block content %}        {% endblock%}
+
+        {% include 'core/footer.html' %}
+        
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="{% static 'js/fixedNav.js' %}"></script>
+        <script async src="https://static.addtoany.com/menu/page.js"></script>
+        <!-- <script src="{% static 'js/postlike.js' %}"></script> -->
+        <script>
+
+            // post request to save a users like
+          $("#like-btn").click(function(){
+                $.post(
+                    'http://127.0.0.1:8000/blog/postLike/',
+                    {
+                        username: '{{request.user.username}}',
+                        aid: {{article.id}},
+                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    },
+                    function(data){
+                        $('#like-count').html(data);
+                    });
+            });
+
+
+        // post request to get counting of likes on article
+
+        $(document).ready(function(){
+                $.post(
+                    'http://127.0.0.1:8000/blog/getLikeCount/',
+                    {
+                        aid:{{article.id}},
+                        'csrfmiddlewaretoken':'{{ csrf_token }}',
+                    },
+                    function(data){
+                            $('#like-count').html(data);
+                });
+            });
+
+        // hide comment box on initial load
+
+        $(document).ready(function(){
+            $('#comment-form').hide();
+            $('#all-comment').hide();
+            getcomments();
+        });
+
+        // open comment box when clicked on comment button
+
+        $(document).ready(function(){
+            $('#comment-btn').click(function(){
+                $('#comment-form').toggle();
+                $('#all-comment').toggle();
+                
+            });
+        });
+
+        // function to get comments
+        function getcomments(){
+            $.post(
+                    'http://127.0.0.1:8000/blog/getComments/',
+                    {
+                        'artl_id':{{article.id}},
+                        'csrfmiddlewaretoken':'{{ csrf_token }}'
+                    },
+                    function(data){              
+                        var instance = JSON.parse(data['all_artl_comments']);                        
+                        // console.log(instance);
+                        html_data = `<p><b>Comments : </b></p>`;
+                        instance.forEach(element => {
+
+                            html_data += `<div id='single-comment' class='bg-light mt-2 p-2'>
+                                <small><b><i class='fa fa-user-circle'></i> ${element['commented_by_username__username']}</b></small><br>
+                                <i><span class='fa fa-comment'></span> ${element['comment_description']}</i>
+                            </div> `;
+                        });
+                        $('#all-comment').html( html_data);
+                });
+        }
+
+        // submit/post comment when clicked om post button
+
+        $(document).ready(function(){
+            $('#submit-comment').click(function(){
+                $.post(
+                    'http://127.0.0.1:8000/blog/postComment/',
+                    {
+                        'cmnt_desc':$('#id_comment_description').val(),
+                        'artl_id':{{article.id}},
+                        'username': '{{request.user.username}}',
+                        'csrfmiddlewaretoken':'{{ csrf_token }}'
+                    },
+                    function(data){
+                        $('#id_comment_description').val("");
+                        getcomments();
+
+                });
+            });
+        });
+        </script>
+        <script>
+            $("#move-to-top").click(function() {
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+                return false;
+            });
+        </script>
+    </body>
+
+</html>

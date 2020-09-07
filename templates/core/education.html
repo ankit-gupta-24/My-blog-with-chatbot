@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block title %} Education {% endblock %}
+{% block content %}
+<div id='main' style="width: 80%; margin:auto;">
+    <h1 class='fadein mb-5 mt-5'>My Education</h1>
+
+    {% for e in edu %}
+    <div class="container mb-5 shadow p-3 mb-5 bg-white rounded">
+        <h2 style='color:goldenrod'>{{e.std_name}}</h2>
+        <p><i>{{e.subject}}</i></p>
+        <p><b>Institute: </b> {{e.institute}}</p>
+        <p><b>Grade: </b>{{e.percent}} %</p>
+        <p><b>Tenure: </b><i>{{e.start_year}} - {{e.end_year}}</i></p>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

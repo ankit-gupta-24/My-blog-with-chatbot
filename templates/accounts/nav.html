@@ -1,0 +1,47 @@
+<div id='navbar_top' class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <h1 class="navbar-brand">
+       <i class="fa fa-star"></i> Welcome {{request.user.username}} <i class="fa fa-star"></i>
+    </h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'home' %}"><b>Home</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact'%}"><b>Contact</b></a>
+        </li>  
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'education'%}"><b>Education</b></a>
+        </li>  
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'experience'%}"><b>Experience</b></a>
+        </li>    
+        <li class="nav-item"> 
+            <a  class="nav-link" href="{% url 'skills'%}"><b>Skills</b></a>
+        </li>  
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'workdone'%}"><b>My Work</b></a>
+        </li>  
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'bloghome'%}"><b>Blog</b></a>
+        </li>  
+        {% if request.user.is_authenticated == True %}
+            <li class="nav-item tel-no btn btn-outline-danger" id='login-btn'>
+                <a class="nav-link" href="{% url 'logoutUser' %}"> <span class="fa fa-sign-out"></span> <b>Logout</b></a>
+            </li>
+        {% endif %} 
+        <li class="nav-item tel-no btn btn-outline-success" id='tel'>
+            <a class="nav-link " href="tel:9879876565"> <span class="fa fa-phone"></span> <b>+91 9879876565</b></a>
+        </li>
+
+               
+    </ul>
+    </div>
+
+</div>

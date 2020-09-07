@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% block title %}Skills{% endblock %}
+{% block content %}
+<div id='main' style="width: 80%; margin:auto;">
+    <h1 class='fadein mb-5 mt-5'>Skills and Achievements ... </h1>
+
+    <div class="row shadow p-3 mb-5 bg-white rounded">
+        <div class="col col-lg-6 col-md-12 col-sm-12 shadow-sm p-3 bg-white rounded">
+            <h4 class="text-primary">Technical Skills</h4>
+            <ul class="text-info">
+                {% for skl in tech_skls %}
+                    <li>{{skl}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col col-lg-6 col-md-12 col-sm-12 shadow-sm p-3 bg-white rounded">
+            <h4 class="text-primary">Interpersonal Skills</h4>
+
+            <ul class="text-info">
+                {% for skl in intpers_skls %}
+                    <li>{{skl}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-5 shadow p-3 mb-5 bg-white rounded">
+        <div class="col">
+            <h4 class="text-warning">Achievements</h4>
+
+            <ul class="">
+                {% for achievement in achievements %}
+
+                    <li>{{achievement}}</li>
+
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

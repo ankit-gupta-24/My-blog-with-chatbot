@@ -1,0 +1,117 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Contact {% endblock %}
+
+{% block content %}
+<div id='main'  style="width: 90%; margin:auto;">
+    <h1 class='mb-5  mt-5'>    Connect with me ... </h1>
+<!--     
+        <button type="button" id='bot-btn' class="btn btn-info float-right shadow" data-toggle="modal" data-target="#exampleModalCenter">
+          Need Help! <br> Chat with Maya
+        </button>
+    </h1>
+
+    
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Hi! I am Maya. How can I help you?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div id='show_msgs' >
+              
+
+                </div>
+            </div>
+            
+              <div class="p-3">
+                  <input class="form-control mb-3" id='new-msg' type="text" placeholder="Enter Query ..."/>              
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" id='msg-sent-btn' class="btn btn-primary">Send</button>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+     -->
+        <div class="row">
+            <div class="col col-md-6 col-sm-12 shadow-sm p-3 mb-5 bg-white rounded" >
+                <div id='connect_form'>
+                    <h3>Reach me by filling this form</h3>
+                      
+                      {% if messages %}
+                          {% for message in messages %}
+                            <div {% if message.tags %} class="alert alert-{{ message.tags}} alert-dismissible" {% endif %}>
+                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                               {{message}}
+                            </div>
+                          {% endfor %}
+                      {% endif %}
+
+                      <form method="POST" action="{% url 'get_message' %}" class="form-group mt-5">
+                          {% csrf_token %}
+
+                          {{contact_form.as_p}}
+
+                        <div class="text-center">
+                          <input type="submit" value="submit" class="btn btn-info ">
+                        </div>
+
+                      </form>
+
+                </div>
+            </div>
+            <div class="col col-md-6 col-sm-12 shadow-sm p-3 mb-5 bg-white rounded" >
+                <div id='social_links' class="text-center">
+                    <h3>Connect with me at Social Media</h3>
+                    <ul >
+                        <li ><a href="" class="text-primary"><span class="fa fa-facebook "></span>&nbsp;&nbsp;Facebook</a></li>
+                        <li><a href="" class="text-danger"><span class="fa fa-instagram "></span>&nbsp;&nbsp;Instagram</a></li>
+                        <li><a href="" class="text-primary"><span class="fa fa-twitter "></span>&nbsp;&nbsp;Twitter</a></li>
+                        <li><a href="" class="text-danger"><span class="fa fa-youtube "></span>&nbsp;&nbsp;Youtube</a></li>
+                        <li><a href="" class="text-primary"><span class="fa fa-linkedin "></span>&nbsp;&nbsp;Linkedin</a></li>
+                    </ul>
+
+                    <div class="mt-5">
+                      <h4>Permanent Address </h4>
+                      <address>
+                        IPS Academy, <br>A.B. Road, Rajendra Nagar, <br>Indore, 452012
+                      </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+// sent msg to bot on clicking #msg-sent-btn
+// retrieve response from bot and ( message + response) add to #show_msgs
+$('#msg-sent-btn').click(function(){
+  var msg = $('#new-msg').val();
+  $.post(
+    'http://127.0.0.1:8000/MayaChatbot/',
+    {
+      msg:msg,
+      'csrfmiddlewaretoken': '{{ csrf_token }}',
+    },
+    function(response){
+      var prev_html = $('#show_msgs').html();
+      var new_html = `<i class='user-msg mt-3 mb-3'>${msg}</i><br> <i class='bot-msg'>${response}</i><br>`;
+      $("#show_msgs").html(prev_html+new_html);
+      $('#new-msg').val("");
+      $('#new-msg').focus();
+    }
+  );
+});
+</script>
+{% endblock %}

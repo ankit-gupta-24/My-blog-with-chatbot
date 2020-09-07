@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% block title %}My Work{% endblock %}
+{% block content %}
+<div id='main' style="width: 80%; margin:auto;">
+    <h1 class='fadein mb-5 mt-5'>My Project / Work ...</h1>
+
+        <div class="row">
+            <div class="card-deck shadow-sm p-3 mb-5 bg-white rounded">
+            {% for prj in prjs %}
+            <div class="col col-lg-6 col-md-6 col-sm-12 mt-5 rounded">
+                <div class="card">
+                    <div><h1 class="text-center shadow rounded">{{prj.id}}</h1></div>
+                    <img class="card-img-top" src="{{ prj.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{prj.title}}</h5>
+                      <p class="card-text"><small class="text-muted">{{prj.technologies}}</small></p>
+                      <p class="card-text">{{prj.description}}</p>                      
+                      <p class="card-text"><i>Completed in {{ prj.start_date|timesince:prj.end_date }} between {{prj.start_date}} and {{prj.end_date}}</i></p>
+                    </div>
+                  </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+</div>
+{% endblock %}

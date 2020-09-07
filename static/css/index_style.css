@@ -1,0 +1,81 @@
+#main{
+    width: 98%;
+    margin: auto;
+}
+
+#content{
+   width: 90%;
+   margin: auto;
+   margin-top:2rem;
+   margin-bottom: 1rem;   
+}
+
+
+
+
+/* contact.html css */
+
+/* 
+#connect_form, #social_links{
+    
+    box-shadow: 3px 3px 5px gray;
+    width: 90%;
+    margin-left:auto ;
+    padding:1rem;
+    background-color: lightgoldenrodyellow;
+    
+} */
+
+#social_links ul li{
+    
+    list-style: none;
+    font-size: larger;
+    padding:1rem;
+    font-weight: bold;
+}
+#social_links ul li a{
+    /* display: block; */
+    text-decoration: none;
+}
+
+#social_links ul li a:hover{
+    /* border: 1px solid gold; */
+    transition: text-transform;
+    transition-duration: 1s;
+    text-transform: uppercase;
+    
+}
+
+@media (max-width:767px){
+    #social_links{
+        margin-top:2rem;
+    }
+    
+}
+
+label{
+    font-weight: 600;
+}
+
+/* blog app css */
+#art_title{
+    text-transform: capitalize;
+}
+
+
+/* bot css */
+.user-msg{
+    background-color: blue;
+    border-radius: 2px;
+    text-align:right ;
+    float: right;
+    color: white;
+    padding:5px 10px 5px 10px;
+}
+
+.bot-msg{
+    background-color: rgb(233, 225, 225);
+    text-align: left;
+    border-radius: 2px;
+    padding:5px 10px 5px 10px;
+}
