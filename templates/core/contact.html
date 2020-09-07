@@ -4,8 +4,8 @@
 
 {% block content %}
 <div id='main'  style="width: 90%; margin:auto;">
-    <h1 class='mb-5  mt-5'>    Connect with me ... </h1>
-<!--     
+    <h1 class='mb-5  mt-5'>    Connect with me ... 
+    
         <button type="button" id='bot-btn' class="btn btn-info float-right shadow" data-toggle="modal" data-target="#exampleModalCenter">
           Need Help! <br> Chat with Maya
         </button>
@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-     -->
+    
         <div class="row">
             <div class="col col-md-6 col-sm-12 shadow-sm p-3 mb-5 bg-white rounded" >
                 <div id='connect_form'>
@@ -93,6 +93,8 @@
 {% block script %}
 
 <script>
+// on pressing enter msg will be sent
+
 
 // sent msg to bot on clicking #msg-sent-btn
 // retrieve response from bot and ( message + response) add to #show_msgs
@@ -106,7 +108,7 @@ $('#msg-sent-btn').click(function(){
     },
     function(response){
       var prev_html = $('#show_msgs').html();
-      var new_html = `<i class='user-msg mt-3 mb-3'>${msg}</i><br> <i class='bot-msg'>${response}</i><br>`;
+      var new_html = `<p class='user-msg'>${msg}</p><br> <p class='bot-msg mt-3'>${response}</p><br>`;
       $("#show_msgs").html(prev_html+new_html);
       $('#new-msg').val("");
       $('#new-msg').focus();
