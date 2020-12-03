@@ -62,7 +62,11 @@ def get_response(user_response):
     if req_tfidf == 0:
         return bot_response + "Sorry! I don't understand you."
     else:
-        return bot_response + sent_tokens[idx]
+        string = bot_response + sent_tokens[idx].split("::")[1]
+        # print(string)
+        # print(bot_response)
+        # print(sent_tokens[idx])
+        return string
 
 
 def MayaResponse(request):
@@ -78,30 +82,10 @@ def MayaResponse(request):
             if greeting(user_response) != None:
                 return HttpResponse( greeting(user_response) )
             else:
-                return HttpResponse( get_response(user_response) )
-                # sent_tokens.remove(user_response)
+                resp = get_response(user_response)
+                sent_tokens.remove(user_response)
+                return HttpResponse( resp )
+                
 
     return redirect('/')
-
-
-
-# flag = True
-# print("Hi! I am Charlie. How can I help you? To exit type'Bye'.")
-
-# while flag:
-#     user_response = input('>> ').lower()
-#     if user_response in ['bye','byy','meet you soon']:
-#         print('Bye! Welcome again. Take care ...')
-#         flag = False
-#     elif user_response in ['thanks','thank you','thankyou','thanks for help','thank you for your help']:
-#         print('you are welcome ... Need any more help...')
-#         if input('>> ').lower() in ['no','noo'] :
-#             print("Thank you! Welcome again..")
-#             flag=False
-#     else:
-#         if greeting(user_response) != None:
-#             print(greeting(user_response))
-#         else:
-#             print(get_response(user_response))
-#             # sent_tokens.remove(user_response)
 

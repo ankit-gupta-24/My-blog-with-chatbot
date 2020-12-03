@@ -1,15 +1,18 @@
-My Name: My name is Charlie.
-Boss Name: My boss name is John Doe. He is a Full Stack developer.
-Address: My adress is knowledge village IPS Academy Indore.
-Education: my education is M.Tech in CSE and B.Tech in CSE.
-Current Work: Currently I am Senior Python developer at Rolls Infotech Indore.
+My Name your name:: My name is Maya.
+Boss Name:: My boss name is Ankit Gupta; He is a Full Stack developer.
+Address:: My adress is knowledge village IPS Academy Indore.
+Education:: my education is M.Tech in CSE and B.Tech in CSE; Please visit <a href= "http://127.0.0.1:8000/education">Education Page</a>.
+Current Work:: Currently I am Senior Python developer at Rolls Infotech Indore.
 
-Experience Level:
+Experience Level work experience ::
 I am a Senior Python developer at Rolls Infotech Indore for 1 year 8 months and currently working here;
 I was  Python developer at dollop Infotech Indore for 6 months;
-I was junior Python developer at ips Academy Indore for 9 months.
+I was junior Python developer at ips Academy Indore for 9 months <br>Please visit <a href= "http://127.0.0.1:8000/experience">Experience Page</a>.
 
-Cost of Project / Software / Website / Application: Actually it depends on the functionality and complexity of software but for a simple straighforward project/software we charge 50 dollars.
+Cost of Project / Software / Website / Application:: Actually it depends on the functionality and complexity of software but for a simple straighforward project/software we charge 50 dollars.
 
-Conatct Detail: Contact at 9879876565 or drop a mail at johndoe@mail.com.
+Conatct Detail email phone mobile :: Contact at 9879876565 or drop a mail at johndoe@mail.com or visit <a href= "http://127.0.0.1:8000/contact">Contact Page</a>.
 
+okk ok fine okkkkk okkk byy by bye see you soon :: Thank you :).
+
+type of software we make categories of software::We are currently offering Website Development, Desktop Application, Mobile Application Development etc Please visit <a href= "http://127.0.0.1:8000/contact">Work Page</a>.

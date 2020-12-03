@@ -1,18 +1,16 @@
-{% extends 'blog/base.html' %}
-{% block title %} {{article.title}} {% endblock %}
-{% block content %}
+{% extends 'blog/base.html' %} {% block title %} {{article.title}} {% endblock %} {% block content %}
 <div id='main' style="width: 80%; margin:auto;">
     <div class="container">
         <h1 class='fadein mb-5 mt-5 text-center' id='art_title'> {{article.title}} </h1>
         <p><i>Published : {{article.pub_date}}</i></p>
         <p><small>Tags: {{article.tags}}</small></p>
-        <p class="text-justify">{{article.description}}</p>
+        <p class="text-justify">{{article.description|safe}}</p>
         <p>Thanks,</p>
         <h5>{{article.author}}</h5>
     </div>
 
     <div class="container row mt-5 text-center">
-    {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
         <div class="col col-lg-3 col-md-6 col-sm-6 mt-2">
             <button class="btn btn-danger" id='like-btn'><i class="fa fa-heart" ></i> <span id='like-count'></span></button>
         </div>
@@ -20,7 +18,7 @@
         <div class="col col-lg-3 col-md-6 col-sm-6 mt-2">
             <button class="btn btn-info" id='comment-btn'><i class="fa fa-comment"></i> Comment</button>
         </div>
-    {% endif %}    
+        {% endif %}
 
         <div class="col col-lg-6 col-md-12 col-sm-12 mt-2 ">
             <span><b>Share:</b></span>
@@ -36,26 +34,23 @@
                 <a class="a2a_button_pinterest"></a>
                 <a class="a2a_button_email"></a>
             </div>
-            
+
             <!-- AddToAny END -->
         </div>
     </div>
     {% if request.user.is_authenticated %}
-    <div id="comment-form" class="container w-75 m-auto" >
+    <div id="comment-form" class="container w-75 m-auto">
         {{comment_form.as_p}}
         <button class="btn btn-primary" id='submit-comment'>Post</button>
     </div>
-<!-- div to show all comment -->
+    <!-- div to show all comment -->
     <div id='all-comment' class="container w-75 m-auto mt-5">
-        
-    </div>
-    {% endif %}
 
-    {% if request.user.is_authenticated == False %}
+    </div>
+    {% endif %} {% if request.user.is_authenticated == False %}
     <p><b><i class='text-danger'>Please Login to Like and Comment </i></b></p>
     {% endif %}
 </div>
 
 
 {% endblock %}
-
